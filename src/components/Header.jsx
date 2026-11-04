@@ -1,5 +1,5 @@
 function Header() {
-  return <h1>Task Manager</h1>;
+  return <h1>Task Counter</h1>;
 }
 
-export default Header;
+export default Header;                                          
