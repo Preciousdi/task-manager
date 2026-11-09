@@ -1,15 +1,18 @@
-# React Task Manager
+# React Task Management Dashboard
 
-A simple Task Manager application built with React and Vite. It allows users to add, view, and delete tasks while keeping track of the total number of tasks.
+A task management dashboard built with React, JavaScript, and Vite. It allows users to organize tasks, track progress, and manage their daily activities.
 
 ## Features
 
 - Add new tasks.
-- Display all added tasks.
-- Delete individual tasks.
-- Reset the task list.
-- Prevent users from adding empty tasks.
-- Automatically update the task counter when tasks are added or deleted.
+- Delete existing tasks.
+- Edit task details.
+- Mark tasks as completed or pending.
+- Assign Low, Medium, or High priority to tasks.
+- Search tasks by title.
+- Filter tasks by All, Completed, or Pending.
+- View task statistics.
+- Responsive layout for different screen sizes.
 
 ## Technologies Used
 
@@ -33,7 +36,7 @@ A simple Task Manager application built with React and Vite. It allows users to 
    cd task-manager
    ```
 
-3. Install the dependencies:
+3. Install dependencies:
 
    ```bash
    npm install
@@ -45,18 +48,21 @@ A simple Task Manager application built with React and Vite. It allows users to 
    npm run dev
    ```
 
-5. Open the local URL displayed in your terminal to view the application.
+5. Open the local URL displayed in your terminal.
 
 ## Learning Objectives
 
 This project helped me understand:
 
-- React components.
-- React state using `useState`.
-- Props and how data is passed between components.
-- Event handling in React.
-- Rendering lists using `.map()`.
-- Updating arrays without modifying the original array.
+- Managing state with `useState`.
+- Working with controlled inputs.
+- Passing data and functions through props.
+- Handling user events.
+- Rendering lists with `.map()`.
+- Filtering arrays with `.filter()`.
+- Conditional rendering.
+- Updating arrays without mutating state.
+- Using unique keys when rendering lists.
 
 ## Author
 
