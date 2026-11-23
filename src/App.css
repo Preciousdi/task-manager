@@ -82,21 +82,42 @@ input::placeholder {
   opacity: 1;
 }
 
+
 /* =================================
    5. TASK FORM
 ================================= */
 
+.task-controls {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto 25px;
+}
+
 .task-form {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 12px;
-  max-width: 850px;
-  margin: 25px auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 15px;
 }
 
 .task-form input {
   flex: 1;
   min-width: 0;
+  height: 45px;
 }
+
+.task-form select {
+  height: 45px;
+}
+
+.task-form button {
+  height: 45px;
+  white-space: nowrap;
+}
+
 
 /* =================================
    6. BUTTONS
@@ -115,15 +136,27 @@ button:hover {
   background: #1d4ed8;
 }
 
+
 /* =================================
    7. SEARCH AND FILTERS
 ================================= */
 
+.task-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
 .task-filters {
   display: flex;
+  align-items: center;
   gap: 12px;
-  max-width: 850px;
-  margin: 0 auto 20px;
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  max-width: none;
+  margin: 0;
 }
 
 .task-filters input {
@@ -131,61 +164,31 @@ button:hover {
   min-width: 0;
 }
 
+.refresh-btn {
+  height: 45px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+
 /* =================================
    8. TASK LIST
 ================================= */
 
-
-/* Outer square around all task cards */
 .task-list {
-  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: flex-start;
   width: 100%;
   max-width: 850px;
-  margin: 20px auto;
-  padding: 12px;
-  border: 2px solid #222;
-  border-radius: 8px 12px 7px 10px;
-}
-
-/* Elastic hand-drawn line */
-
-.task-list {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 100%;
-  max-width: 850px;
-  margin: 20px auto;
-  padding: 12px;
-  border: 2px solid #222;
-  border-radius: 10px;
-}
-
-/* Single elastic-looking border */
-.task-list::after {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  border: 1px solid #222;
-  border-radius: 12px 9px 11px 8px;
-  clip-path: polygon(
-    2% 1%, 20% 0%, 40% 1%, 60% 0%,
-    80% 1%, 99% 2%, 100% 30%, 99% 70%,
-    100% 98%, 70% 100%, 40% 99%,
-    10% 100%, 0% 95%, 1% 60%, 0% 30%
-  );
-  pointer-events: none;
+  margin: 0 auto;
 }
 
 .task-row {
   display: flex;
   align-items: stretch;
   width: 100%;
-  margin: 10px 0;
+  margin: 18px 0;
 }
 
 /* =================================
@@ -286,7 +289,177 @@ button:hover {
 }
 
 /* =================================
-   15. RESPONSIVE DESIGN
+   15. TASK TABLE
+================================= */
+
+.task-table-container {
+  width: 100%;
+  max-width: 850px;
+  margin: 25px auto;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: visible;
+}
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.task-table th,
+.task-table td {
+  padding: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.task-table th {
+  background: #f8fafc;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.task-table td {
+  color: #334155;
+  font-size: 14px;
+}
+
+.task-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* =================================
+   16. PRIORITY BADGES
+================================= */
+
+.priority-badge,
+.status-completed,
+.status-pending {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.priority-low {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.priority-medium {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.priority-high {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* =================================
+   17. TASK STATUS
+================================= */
+
+.status-completed {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* =================================
+   18. KEBAB MENU
+================================= */
+
+.action-cell {
+  position: relative;
+}
+
+.kebab-container {
+  position: relative;
+  display: inline-block;
+}
+
+.kebab-button {
+  background: transparent;
+  color: #475569;
+  font-size: 25px;
+  line-height: 1;
+  padding: 5px 12px;
+  border-radius: 6px;
+}
+
+.kebab-button:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.kebab-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 20;
+  min-width: 165px;
+  padding: 6px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.kebab-menu button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  background: transparent;
+  color: #334155;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.kebab-menu button:hover {
+  background: #f1f5f9;
+}
+
+.kebab-menu .menu-delete {
+  color: #dc2626;
+}
+
+.kebab-menu .menu-delete:hover {
+  background: #fee2e2;
+}
+
+/* =================================
+   19. TABLE EDITING
+================================= */
+
+.table-edit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.table-edit input {
+  min-width: 100px;
+  width: 100%;
+}
+
+.table-edit button {
+  font-size: 12px;
+  padding: 7px 10px;
+}
+
+
+/* =================================
+   20. RESPONSIVE DESIGN
 ================================= */
 
 @media (max-width: 600px) {
@@ -308,11 +481,21 @@ button:hover {
   }
 
   .task-form input {
+    flex: 1 1 100%;
     min-width: 100%;
   }
 
   .task-filters {
     flex-wrap: wrap;
+    flex: 1 1 100%;
+  }
+
+  .task-filter-row {
+    flex-wrap: wrap;
+  }
+
+  .refresh-btn {
+    width: 100%;
   }
 
   .task-card {
@@ -328,4 +511,44 @@ button:hover {
   .task-actions button {
     width: auto;
   }
+
+  .task-table-container {
+    overflow-x: auto;
+  }
+
+  .task-table {
+    min-width: 600px;
+  }
+
+  .task-table th,
+  .task-table td {
+    padding: 12px;
+  }
+}
+/* =================================
+   21. ERROR MESSAGE
+================================= */
+
+.error-message {
+  max-width: 850px;
+  margin: 15px auto;
+  padding: 12px 16px;
+  color: #dc2626;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* =================================
+   22. LOADING MESSAGE
+================================= */
+
+.loading-message {
+  max-width: 850px;
+  margin: 20px auto;
+  padding: 15px;
+  text-align: center;
+  color: #64748b;
+  font-size: 15px;
 }

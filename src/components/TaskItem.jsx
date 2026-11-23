@@ -1,60 +1,116 @@
+
 import { useState } from "react";
 
-function TaskItem({ number, task, onDeleteTask, onToggleTask, onEditTask }) {
+function TaskItem({
+  number,
+  task,
+  onDeleteTask,
+  onToggleTask,
+  onEditTask,
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(task.title);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   function handleSave() {
     if (newTitle.trim() === "") return;
+
     onEditTask(task.id, newTitle.trim());
     setIsEditing(false);
   }
 
- return (
-  <div className="task-card">
-    <span className="task-number">{number}.</span>
-      <div className="task-details">
-        {isEditing ? (
-          <input
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-          />
-        ) : (
-          <h3 className={task.completed ? "completed-title" : ""}>
-            {task.title}
-          </h3>
-        )}
+  function handleCancel() {
+    setNewTitle(task.title);
+    setIsEditing(false);
+  }
 
-        <p>Priority: <strong>{task.priority}</strong></p>
-        <p>Status: {task.completed ? "Completed" : "Pending"}</p>
-      </div>
+  return (
+    <tr>
+      <td>{number}</td>
 
-      <div className="task-actions">
+      <td>
         {isEditing ? (
-          <>
-            <button onClick={handleSave}>Save</button>
-            <button className="cancel-btn" onClick={() => {
-              setNewTitle(task.title);
-              setIsEditing(false);
-            }}>
+          <div className="table-edit">
+            <input
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+            />
+            <button type="button" onClick={handleSave}>
+              Save
+            </button>
+            <button type="button" onClick={handleCancel}>
               Cancel
             </button>
-          </>
+          </div>
         ) : (
-          <>
-            <button onClick={() => onToggleTask(task.id)}>
-              {task.completed ? "Mark Pending" : "Mark Completed"}
-            </button>
-            <button className="edit-btn" onClick={() => setIsEditing(true)}>
-              Edit
-            </button>
-            <button className="delete-btn" onClick={() => onDeleteTask(task.id)}>
-              Delete
-            </button>
-          </>
+          <span className={task.completed ? "completed-title" : ""}>
+            {task.title}
+          </span>
         )}
-      </div>
-    </div>
+      </td>
+
+      <td>
+        <span className={`priority-badge priority-${task.priority.toLowerCase()}`}>
+          {task.priority}
+        </span>
+      </td>
+
+      <td>
+        <span className={task.completed ? "status-completed" : "status-pending"}>
+          {task.completed ? "Completed" : "Pending"}
+        </span>
+      </td>
+
+      <td className="action-cell">
+        <div className="kebab-container">
+          <button
+            type="button"
+            className="kebab-button"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label="Task actions"
+            aria-expanded={menuOpen}
+          >
+            ⋮
+          </button>
+
+          {menuOpen && (
+            <div className="kebab-menu">
+              <button
+                type="button"
+                onClick={() => {
+                  onToggleTask(task.id);
+                  setMenuOpen(false);
+                }}
+              >
+                {task.completed ? "Mark Pending" : "Mark Completed"}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setNewTitle(task.title);
+                  setIsEditing(true);
+                  setMenuOpen(false);
+                }}
+              >
+                Edit Task
+              </button>
+
+              <button
+                type="button"
+                className="menu-delete"
+                onClick={() => {
+                  onDeleteTask(task.id);
+                  setMenuOpen(false);
+                }}
+              >
+                Delete Task
+              </button>
+            </div>
+          )}
+        </div>
+      </td>
+    </tr>
   );
 }
 

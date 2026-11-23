@@ -1,4 +1,3 @@
-
 function TaskFilters({ search, setSearch, filter, setFilter }) {
   return (
     <div className="task-filters">
